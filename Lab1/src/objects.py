@@ -22,20 +22,22 @@ class Wireframe(object):
 
 
 
-    def check(self):
+    # def check(self):
 
-        # print(type(self.nodes[0].x))
+    #     # print(type(self.nodes[0].x))
 
-        a = abs(self.nodes[0].y - self.nodes[2].y)
-        b = abs(self.nodes[0].x - self.nodes[4].x)
-        # c = self.nodes[0].y - self.nodes[2].y
-        # d = self.nodes[0].y - self.nodes[2].y
-        if a == b:
-            print('square', a)
-        else:
-            print('not a square', a, b)
+    #     a = abs(self.nodes[0].y - self.nodes[2].y)
+    #     b = abs(self.nodes[0].x - self.nodes[4].x)
+    #     # c = self.nodes[0].y - self.nodes[2].y
+    #     # d = self.nodes[0].y - self.nodes[2].y
+    #     if a == b:
+    #         print('square', a)
+    #     else:
+    #         print('not a square', a, b)
 
-    def find_center(self):
+    
+        
+    def find_local_center(self):
 
         nodes_qty = len(self.nodes)
 
@@ -43,12 +45,12 @@ class Wireframe(object):
         center_y = sum([node.y for node in self.nodes]) / nodes_qty
         center_z = sum([node.z for node in self.nodes]) / nodes_qty
 
-        return Node([center_x, center_y, center_z])
+        return Node(center_x, center_y, center_z)
         
 
-    def rotate_x(self, angle):
+    def rotate_x(self, angle, center):
 
-        center = self.find_center()
+        # center = Node(center)
         for node in self.nodes:
             h = node.y - center.y
             v = node.z - center.z
@@ -61,8 +63,9 @@ class Wireframe(object):
             # print('\n')
 
 
-    def rotate_y(self, angle):
-        center = self.find_center()
+    def rotate_y(self, angle, center):
+        
+        # center = Node(center)
         for node in self.nodes:
             h = node.x - center.x
             v = node.z - center.z
@@ -74,9 +77,9 @@ class Wireframe(object):
             # print('\n')
 
 
-    def rotate_z(self, angle):
+    def rotate_z(self, angle, center):
 
-        center = self.find_center()
+        # center = Node(center)
         for node in self.nodes:
             h = node.x - center.x
             v = node.y - center.y
@@ -98,10 +101,10 @@ class Wireframe(object):
 
 class Node():
     
-    def __init__(self, xyz):
-        self.x = xyz[0]
-        self.y = xyz[1]
-        self.z = xyz[2]
+    def __init__(self, x, y, z):
+        self.x = x
+        self.y = y
+        self.z = z
 
     def __repr__(self):
         return f'({self.x} {self.y} {self.z})'

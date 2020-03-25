@@ -7,6 +7,7 @@ class Pen():
         self.node_color = (255,255,255)
         self.grid_color = (177,177,177)
         self.edge_color = (200,200,200)
+        self.aim_color = (255,0,255)
         self.node_radius = 4
         self.grid_radius = 2
 
@@ -35,6 +36,14 @@ class Pen():
             screen,
             self.node_color,
             (int(node.x), int(node.y)),
+            self.node_radius,
+            0)
+
+    def draw_aim(self, screen, x, y):
+        pygame.draw.circle(
+            screen,
+            self.aim_color,
+            (x, y),
             self.node_radius,
             0
         )
