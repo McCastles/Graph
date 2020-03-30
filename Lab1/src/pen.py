@@ -27,24 +27,23 @@ class Pen():
         pygame.draw.aaline(
             screen,
             self.edge_color,
-            (start.x, start.y),
-            (finish.x, finish.y),
+            start,
+            finish,
             1)
 
-    def draw_node(self, screen, node):
+    def draw_node(self, screen, node_x, node_y):
         pygame.draw.circle(
             screen,
             self.node_color,
-            (int(node.x), int(node.y)),
+            (node_x, node_y),
             self.node_radius,
             0)
 
-    def draw_aim(self, screen, x, y):
+    def draw_aim(self, screen, x, y, aim_radius):
         pygame.draw.circle(
             screen,
             self.aim_color,
             (x, y),
-            self.node_radius,
-            0
-        )
+            aim_radius,
+            1)
 
