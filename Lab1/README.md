@@ -1,6 +1,10 @@
-# Lab1
+# Lab1 - Virtual Camera
 
-![Alt Text](https://media.giphy.com/media/Y4cQvBXCpKpabXSbO1/giphy.gif)
+![Alt Text](https://media.giphy.com/media/JPgLoqYcA7hF3PX5FP/giphy.gif)
+
+## Dependencies
+
+```pyagme```
 
 ## Usage
 
@@ -17,4 +21,5 @@ Translation along Z axis (not zoom!): `+` and `-` keys
 ## Reference
 
 Tutorial: [link](http://www.petercollingridge.co.uk/tutorials/3d/pygame/)
+
 GitHub repo: [link](https://github.com/petercollingridge/code-for-blog/tree/master/pygame-3D)
