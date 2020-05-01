@@ -36,7 +36,6 @@ def main():
 
     # DATA LOADING FROM FILE
     figures = get_figures(path)
-    print(figures[0])
     window.figures = figures
     window.run()
     

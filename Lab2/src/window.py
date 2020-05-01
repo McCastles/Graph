@@ -2,6 +2,7 @@
 import time
 import pygame
 from .pen import Pen
+from .display import display as inner_display
 
 
 class Window:
@@ -40,9 +41,12 @@ class Window:
         # WINDOW
         self.WIDTH = width
         self.HEIGHT = height
-        # self.BACKGROUND = (10,10,50)
-        self.BACKGROUND = (255,255,255)
+        self.BACKGROUND = (0,0,0)
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
+        self.pen = Pen()
+        
+        # SAFE MODE
+        self.safe_mode = safe_mode
 
         # MOVEMENT
         self.STEP = step
@@ -55,15 +59,30 @@ class Window:
         self.FOCAL_MAX = focal_max
         self.FOCAL_MIN = focal_min
 
-        # FIGURES STORAGE
+        # FIGURE COMPONENTS
         self.figures = []
-        self.display_nodes = False
-        self.display_edges = True
-        self.safe_mode = safe_mode
+        self.display_nodes = 0
+        self.display_edges = 0
+        self.display_facets = 1
+        
+        self.facets_composition = [
+            [0, 2, 6, 4],
+            [0, 2, 3, 1],
+            [1, 3, 7, 5],
+            [5, 7, 6, 4],
+            [2, 3, 7, 6],
+            [0, 1, 5, 4]
+        ]
+        
+        self.facets_colors = [
+            (75, 200, 60),  # green
+            (70, 60, 200),  # blue
+            (250, 10, 20),  # red
+            (250, 250, 10), # yellow
+            (10, 250, 250), # cyan
+            (230, 10, 250)  # pink
+        ]
 
-        # PEN OBJECT
-        self.pen = Pen()
-    
 
     def zoom(self, step):
         self.focal += step
@@ -75,52 +94,8 @@ class Window:
         self.aim_radius = int(self.focal / 10)
     
 
-
     def display(self):
-        
-        is_visible = lambda node: \
-            node[1] > self.focal if self.safe_mode else True
-            
-
-        self.screen.fill(self.BACKGROUND)
-        self.pen.draw_aim(
-            self.screen,
-            self.WIDTH // 2, self.HEIGHT // 2,
-            self.aim_radius)
-
-        # FIGURES
-        for figure in self.figures:
-            
-            # NODES
-            if self.display_nodes:
-                for node in figure.nodes:
-                    if is_visible(node):
-                        x, y = figure.cast_3d_to_2d(
-                            node, self.WIDTH, self.HEIGHT, self.focal)
-                        self.pen.draw_node(self.screen, int(x), int(y))
-
-            # EDGES
-            if self.display_edges:
-                for (index_start, index_finish) in figure.edges:
-
-                    node_start = figure.nodes[index_start]
-                    node_finish = figure.nodes[index_finish]
-
-                    if is_visible(node_start) and is_visible(node_finish):
-
-                        pair_start = figure.cast_3d_to_2d(
-                            node_start,
-                            self.WIDTH, self.HEIGHT, self.focal)
-
-                        pair_finish = figure.cast_3d_to_2d(
-                            node_finish,
-                            self.WIDTH, self.HEIGHT, self.focal)
-                            
-                        self.pen.draw_edge(
-                            self.screen,
-                            pair_start,
-                            pair_finish)
-                    
+        inner_display(self)                
                     
     def rotate_all(self, axis, rotation_angle):
 

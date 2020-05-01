@@ -4,11 +4,9 @@ class Pen():
 
     def __init__(self):
 
-        self.node_color = (0,0,0)
-        self.edge_color = (0,0,0)
-        # self.node_color = (255,255,255)
-        # self.edge_color = (200,200,200)
-        # self.grid_color = (177,177,177)
+        self.node_color = (255,255,255)
+        self.edge_color = (255,255,255)
+
         self.aim_color = (255,0,255)
         self.node_radius = 4
         self.grid_radius = 2
@@ -40,6 +38,13 @@ class Pen():
             (node_x, node_y),
             self.node_radius,
             0)
+
+    def draw_facet(self, screen, facet, color):
+        pygame.draw.polygon(
+            screen,
+            color,
+            facet)
+    
 
     def draw_aim(self, screen, x, y, aim_radius):
         pygame.draw.circle(
