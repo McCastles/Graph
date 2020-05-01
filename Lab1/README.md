@@ -1,6 +1,6 @@
 # Lab1 - Virtual Camera
 
-![Alt Text](https://media.giphy.com/media/W5gZTixhwg181iKTbw/giphy.gif)
+![Alt Text](https://github.com/McCastles/Graph/blob/master/Lab1/demo.gif)
 
 ## Dependencies
 
